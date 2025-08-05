@@ -25,8 +25,8 @@ export class BrandsService {
     return await this.brandRepository.findBy({id});
   }
 
-  update(id: number, updateBrandDto: UpdateBrandDto) {
-    return `This action updates a #${id} brand`;
+  async update(id: number, updateBrandDto: UpdateBrandDto) {
+    return await this.brandRepository.update(id,updateBrandDto);
   }
 
   async remove(id: number) {

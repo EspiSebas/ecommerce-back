@@ -26,8 +26,8 @@ export class CategoriesService {
     return await this.categoryRepository.findBy({id});
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    return await this.categoryRepository.update(id,updateCategoryDto);
   }
 
   async remove(id: number) {

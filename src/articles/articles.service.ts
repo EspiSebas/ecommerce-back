@@ -52,15 +52,37 @@ export class ArticlesService {
     return await this.articleRepository.find({relations:['brand','categories']});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} article`;
+  async findOne(id: number) {
+    return await this.articleRepository.findBy({id}) ;
   }
 
-  update(id: number, updateArticleDto: UpdateArticleDto) {
-    return `This action updates a #${id} article`;
+  async update(id: number, updateArticleDto: UpdateArticleDto) {
+    const brand = await this.brandRepository.findOneBy({ name: updateArticleDto.brand })
+
+    if (!brand) {
+      return 'Not found the brand !!'
+    }
+
+    const categories = await this.categoryRepository.find({
+      where: updateArticleDto.categories.map(name => ({ name })),
+    });
+
+    if (categories.length !== updateArticleDto.categories.length) {
+        throw new BadRequestException('Some categories not found');
+    }
+
+    if(categories.length >= 3){
+      throw new BadRequestException('Maximum are three categories in each article');
+    }
+
+    return await this.articleRepository.update(id,{
+      ...updateArticleDto,
+      brand: brand,
+      categories: categories
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} article`;
+  async remove(id: number) {
+    return await this.articleRepository.softDelete({id});
   }
 }
