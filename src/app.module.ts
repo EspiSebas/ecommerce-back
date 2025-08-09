@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArticlesModule } from './articles/articles.module';
 import { BrandsModule } from './brands/brands.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -16,7 +17,7 @@ import { UserModule } from './user/user.module';
       database: 'stock',
       autoLoadEntities: true,
       synchronize: true,
-    }),CategoriesModule, ArticlesModule, BrandsModule, UserModule],
+    }),CategoriesModule, ArticlesModule, BrandsModule, UserModule, AuthModule],
   controllers: [],
   providers: [],
 })

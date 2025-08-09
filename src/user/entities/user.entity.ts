@@ -12,10 +12,10 @@ export class User {
     @Column({ length: 120 })
     lastName: String ;
 
-    @Column({unique:true})
+    @Column({type: 'bigint', unique: true})
     documentIdent: number;
 
-    @Column({length:13})
+    @Column({type: 'bigint', unique: true})
     numberCellphone: number;
 
     @Column({unique:true,nullable:false})

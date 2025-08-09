@@ -1,8 +1,7 @@
-import { IsEmail, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 import { Roles } from "src/common/roles";
-import { Column } from "typeorm";
 
-export class CreateUserDto {
+export class RegisterUserDto {
     @IsString()
     name: string;
 
@@ -18,13 +17,10 @@ export class CreateUserDto {
     @IsString()
     email: string;
 
-    @Column()
-    password: string;
-
     @IsString()
     @IsOptional()
-    role:Roles;
-    
-    
+    role: Roles;
 
+    @IsString()
+    password: string;
 }
