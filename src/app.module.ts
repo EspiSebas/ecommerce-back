@@ -6,6 +6,7 @@ import { ArticlesModule } from './articles/articles.module';
 import { BrandsModule } from './brands/brands.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CartShoppingModule } from './cart-shopping/cart-shopping.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
       database: 'stock',
       autoLoadEntities: true,
       synchronize: true,
-    }),CategoriesModule, ArticlesModule, BrandsModule, UserModule, AuthModule],
+    }),CategoriesModule, ArticlesModule, BrandsModule, UserModule, AuthModule, CartShoppingModule],
   controllers: [],
   providers: [],
 })
