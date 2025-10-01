@@ -1,15 +1,20 @@
-import { Column, Entity } from "typeorm";
+import { User } from "src/user/entities/user.entity";
+import { Column, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, UpdateDateColumn } from "typeorm";
+import { CartShoppingDetails } from "./cart-shopping-details";
 
 @Entity()
 export class CartShopping {
     @Column({ primary: true, generated: true })
-    id: number;
+    idCart: number;
+
+    @OneToOne(() => User, user => user.cartShopping, { eager: true, nullable: false })
+    @JoinColumn()
+    user: User;
     
-    @Column({ unique: true, length: 50 })
-    name: String;
+    @OneToMany(() => CartShoppingDetails, (detalle) => detalle.cart, { cascade: true })
+    details: CartShoppingDetails[]
 
-    @Column()
-    quantity: Number;
-
+    @UpdateDateColumn()
+    lastModifyDate: Date;
 
 }

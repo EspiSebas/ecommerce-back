@@ -1,6 +1,7 @@
 import { Brand } from "src/brands/entities/brand.entity";
+import { CartShoppingDetails } from "src/cart-shopping/entities/cart-shopping-details";
 import { Category } from "src/categories/entities/category.entity";
-import { Column, DeleteDateColumn, Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { Column, DeleteDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 
 @Entity()
 export class Article {
@@ -23,8 +24,11 @@ export class Article {
     brand: Brand;
 
     @ManyToMany(() => Category, category => category.articles, { cascade: true })
-    @JoinTable() // Crea la tabla intermedia article_categories
+    @JoinTable() 
     categories: Category[];
+
+    @OneToMany(() => CartShoppingDetails, (detalle) => detalle.article)
+    details: CartShoppingDetails[];
 
     @DeleteDateColumn({ nullable: true })
     deletedAt?: Date;

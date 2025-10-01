@@ -1,5 +1,6 @@
+import { CartShopping } from "src/cart-shopping/entities/cart-shopping.entity";
 import { Roles } from "src/common/roles";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToOne } from "typeorm";
 
 @Entity()
 export class User {
@@ -25,8 +26,10 @@ export class User {
     password: string;
 
 
-   @Column({ type: 'enum', default: Roles.CLIENT , enum: Roles})
+    @Column({ type: 'enum', default: Roles.CLIENT , enum: Roles})
     role: string;
     
+    @OneToOne(() => CartShopping, (carrito) => carrito.user)
+    cartShopping: CartShopping;
 
 }
